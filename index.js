@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const routes = require('./routes/routes.js');
 const hbs = require('hbs');
-const mysql = require('mysql');
+// const mysql = require('mysql');
 //const database = require('./models/database.js');
 
 
