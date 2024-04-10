@@ -18,4 +18,7 @@ app.post('/search_data_server0', server0_controllers.search_data_server0);
 app.post('/delete_data_server0', server0_controllers.delete_data_server0);
 app.post('/edit_data_server0', server0_controllers.edit_data_server0);
 
+app.post('/search_data_server1', server1_controllers.search_data_server1);
+app.post('/search_data_server2', server2_controllers.search_data_server2);
+
 module.exports = app;

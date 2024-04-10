@@ -38,31 +38,13 @@
 <body>
     <div class = header>   
         <a href="/"><button>Back to Menu</button></a>
-        <form action="search.php" method="get">
+        <form id="searchForm">
             <label for="search">Search:</label>
-            <input type="text" id="search" name="query">
-            <button type="submit">Search</button>
+            <input type="text" id="search" name="query" placeholder="Patient ID">
+            <button type="submit" id="search-button">Search</button>
         </form>
 
     </div>
-    <form id="appointmentForm">
-        <h2>Add Appointment</h2>
-        <label for="appointment_id">Appointment ID:</label><br>
-        <input type="text" id="appointment_id" name="appointment_id"><br><br>
-
-        <label for="region">Region:</label><br>
-        <select id="region" name="region" style="width: 12%;">
-            <option value="NCR">NCR</option>
-            <option value="CAR">CAR</option>
-            <option value="Region I">Ilocos Region</option>
-            <option value="Region II">Cagayan Valley</option>
-            <option value="Region III">Central Luzon</option>
-            <option value="Region IV-A">CALABARZON</option>
-            <option value="Region IV-B">MIMAROPA</option>
-        </select><br><br>
-
-        <button type="submit">Submit</button>
-    </form>
 
     <h2>Appointments in Luzon</h2>
 
@@ -75,13 +57,27 @@
         </thead>
         <tbody>
             <!-- Inside the <tbody> tag -->
+            {{#each data}}
             <tr>
-                <td><?php echo $appointment['id']; ?></td>
-                <td><?php echo $appointment['region']; ?></td>
+                <td>{{this.apptid}}</td>
+                <td>{{this.RegionName}}</td>
+                {{!-- <td>
+                    <form action="edit_appointment.php" method="post">
+                        <input type="hidden" name="appointment_id" value="<?php echo $appointment['id']; ?>">
+                        <button type="submit">Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="delete_appointment.php" method="post">
+                        <input type="hidden" name="appointment_id" value="<?php echo $appointment['id']; ?>">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td> --}}
             </tr>
+            {{/each}}
 
         </tbody>
     </table>
-
+<script src="/js/Server1.js"></script>
 </body>
 </html>
