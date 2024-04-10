@@ -16,5 +16,6 @@ app.get('/server2',  server2_controllers.get_server2);
 app.post('/insert_data_server0', server0_controllers.insert_data_server0);
 app.post('/search_data_server0', server0_controllers.search_data_server0);
 app.post('/delete_data_server0', server0_controllers.delete_data_server0);
+app.post('/edit_data_server0', server0_controllers.edit_data_server0);
 
 module.exports = app;

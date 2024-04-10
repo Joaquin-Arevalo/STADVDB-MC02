@@ -94,10 +94,33 @@ const server0_controller = {
         });
     },
 
-    edit_data_sever0: async function(req, res){
+    edit_data_server0: async function(req, res){
         const {apptid_b, pxid_b, RegionName_b} = req.body;
 
-        
+        pool.getConnection((err, connection) => {
+            if (err) {
+                console.error('Error connecting to database:', err);
+                return res.status(500).send('Internal Server Error');
+            }
+    
+            // Use the connection for database operations
+            const updateQuery = 'UPDATE appointments SET pxid = ?, RegionName = ? WHERE apptid = ?';
+            const updateValues = [pxid_b, RegionName_b, apptid_b];
+    
+            connection.query(updateQuery, updateValues, (updateError, updateResult) => {
+                // Release the connection back to the pool
+                connection.release();
+    
+                if (updateError) {
+                    console.error('Error executing update query:', updateError);
+                    return res.status(500).send('Internal Server Error');
+                }
+    
+                console.log('Row updated successfully:', updateResult);
+                // Redirect to the same page to display the updated data or handle as appropriate
+                res.redirect('/server0'); // Redirect to the same page or any other page
+            });
+        });
     }
 }
 
