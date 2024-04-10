@@ -58,11 +58,8 @@ document.addEventListener("DOMContentLoaded", function(){
             return response.text();
         })
         .then(html => {
-            // Handle the response as needed
-            console.log(html);
-            // Optionally, redirect to another page
             document.getElementById('searchForm').reset();//check later
-            window.location.href = '/server0';
+            document.body.innerHTML = html;
         })
         .catch(error => {
             console.error('Error: /search_data_server0', error);
