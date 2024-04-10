@@ -47,6 +47,8 @@
     </div>
     <form id="appointmentForm">
         <h2>Add Appointment</h2>
+        <label for="appt_id">Appointment ID:</label><br>
+        <input type="text" id="appt_id" name="appt_id"><br><br>
         <label for="patient_id">Patient ID:</label><br>
         <input type="text" id="patient_id" name="patient_id"><br><br>
 
@@ -91,21 +93,60 @@
                 <td>{{this.apptid}}</td>
                 <td>{{this.RegionName}}</td>
                 {{!-- <td>
-                    <form action="edit_appointment.php" method="post">
-                        <input type="hidden" name="appointment_id" value="<?php echo $appointment['id']; ?>">
+                    <form >
+                        <input type="hidden">
                         <button type="submit">Edit</button>
                     </form>
-                </td>
-                <td>
-                    <form action="delete_appointment.php" method="post">
-                        <input type="hidden" name="appointment_id" value="<?php echo $appointment['id']; ?>">
-                        <button type="submit">Delete</button>
+                </td> --}}
+                {{!-- <td>
+                    <form id="deleteForm">
+                        <input type="hidden" name="appointment_id" value="{{this.apptid}}">
+                        <button type="submit" id="delete-button">Delete</button>
                     </form>
                 </td> --}}
             </tr>
             {{/each}}
         </tbody>
     </table>
+
+    <form id="deleteForm">
+        <h2>Delete Appointment</h2>
+        <label for="delete_appt_id">Appointment ID:</label><br>
+        <input type="text" id="delete_appt_id" name="delete_appt_id"><br><br>
+        <button type="submit" id="delete-button">Delete</button>
+    </form>
+
+    <form id="editForm">
+        <h2>Edit Appointment</h2>
+        <label for="edit_appt_id">Appointment ID(Current):</label><br>
+        <input type="text" id="edit_appt_id" name="edit_appt_id"><br><br>
+        <label for="edit_patient_id">Patient ID(New):</label><br>
+        <input type="text" id="edit_patient_id" name="edit_patient_id"><br><br>
+
+        <label for="edit_region">Region(New):</label><br>
+        <select id="edit_region" name="edit_region" style="width: 12%;">
+            <option value="NCR">NCR</option>
+            <option value="CAR">CAR</option>
+            <option value="Region I">Ilocos Region</option>
+            <option value="Region II">Cagayan Valley</option>
+            <option value="Region III">Central Luzon</option>
+            <option value="Region IV-A">CALABARZON</option>
+            <option value="Region IV-B">MIMAROPA</option>
+            <option value="Region V">Bicol Region</option>
+            <option value="Region VI">Western Visayas</option>
+            <option value="Region VII">Central Visayas</option>
+            <option value="Region VIII">Eastern Visayas</option>
+            <option value="Region IX">Zamboanga Peninsula</option>
+            <option value="Region X">Northern Mindanao</option>
+            <option value="Region XI">Davao Region</option>
+            <option value="Region XII">SOCCSKSARGEN</option>
+            <option value="Region XIII">Caraga</option>
+            <option value="BARMM">BARMM</option>
+        </select><br><br>
+
+
+        <button type="submit" id="edit-button">Submit</button>
+    </form>
 <script src="/js/Server0.js"></script>
 </body>
 </html>

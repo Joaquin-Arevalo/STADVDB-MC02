@@ -8,8 +8,7 @@ const server0_controller = {
     },
     
     insert_data_server0: async function(req, res){
-        // const {apptid_b, pxid_b, RegionName_b} = req.body;
-        const {pxid_b, RegionName_b} = req.body;
+        const {apptid_b, pxid_b, RegionName_b} = req.body;
 
         pool.getConnection((err, connection) => {
             if (err) {
@@ -17,35 +16,23 @@ const server0_controller = {
                 return res.status(500).send('Internal Server Error');
             }
         
-            // Use the connection for database operations
-            const getCountQuery = 'SELECT COUNT(*) AS rowCount FROM appointments';
-            
-            connection.query(getCountQuery, (countError, countResult) => {
-                if (countError) {
-                    console.error('Error getting row count:', countError);
-                    connection.release();
+            const insertQuery = 'INSERT INTO appointments (apptid, pxid, RegionName) VALUES (?, ?, ?)';
+            const insertValues = [apptid_b, pxid_b, RegionName_b];
+    
+            connection.query(insertQuery, insertValues, (insertError, insertResult) => {
+                // Release the connection back to the pool
+                connection.release();
+    
+                if (insertError) {
+                    console.error('Error executing query:', insertError);
                     return res.status(500).send('Internal Server Error');
                 }
-        
-                const apptid = countResult[0].rowCount + 1; // Increment the row count to get the new pxid
-        
-                const insertQuery = 'INSERT INTO appointments (apptid, pxid, RegionName) VALUES (?, ?, ?)';
-                const insertValues = [apptid, pxid_b, RegionName_b];
-        
-                connection.query(insertQuery, insertValues, (insertError, insertResult) => {
-                    // Release the connection back to the pool
-                    connection.release();
-        
-                    if (insertError) {
-                        console.error('Error executing query:', insertError);
-                        return res.status(500).send('Internal Server Error');
-                    }
-        
-                    console.log('New row inserted successfully:', insertResult);
-                    // Redirect to the same page to display the updated data
-                    res.redirect('/server0');
-                });
+    
+                console.log('New row inserted successfully:', insertResult);
+                // Redirect to the same page to display the updated data
+                res.redirect('/server0');
             });
+            
         });
     },
 
@@ -76,6 +63,41 @@ const server0_controller = {
                 res.render('Server0', { data: results }); // Assuming you have a search_results.hbs file for rendering search results
             });
         });
+    },
+
+    delete_data_server0: async function(req, res){
+        const {apptid_b} = req.body;
+
+        pool.getConnection((err, connection) => {
+            if (err) {
+                console.error('Error connecting to database:', err);
+                return res.status(500).send('Internal Server Error');
+            }
+    
+            // Use the connection for database operations
+            const deleteQuery = 'DELETE FROM appointments WHERE apptid = ?';
+            const deleteValues = [apptid_b];
+    
+            connection.query(deleteQuery, deleteValues, (deleteError, deleteResult) => {
+                // Release the connection back to the pool
+                connection.release();
+    
+                if (deleteError) {
+                    console.error('Error executing delete query:', deleteError);
+                    return res.status(500).send('Internal Server Error');
+                }
+    
+                console.log('Row deleted successfully:', deleteResult);
+                // Redirect to the same page to display the updated data or handle as appropriate
+                res.redirect('/server0'); // Redirect to the same page or any other page
+            });
+        });
+    },
+
+    edit_data_sever0: async function(req, res){
+        const {apptid_b, pxid_b, RegionName_b} = req.body;
+
+        
     }
 }
 
