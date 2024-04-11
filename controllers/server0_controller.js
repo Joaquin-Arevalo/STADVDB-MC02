@@ -1,7 +1,5 @@
 const pool = require('../models/server0_database.js');
 
-
-
 const server0_controller = {
     get_server0: function(req, res){
         res.render('Server0');
@@ -20,7 +18,6 @@ const server0_controller = {
             const insertValues = [apptid_b, pxid_b, RegionName_b];
     
             connection.query(insertQuery, insertValues, (insertError, insertResult) => {
-                // Release the connection back to the pool
                 connection.release();
     
                 if (insertError) {
@@ -29,7 +26,6 @@ const server0_controller = {
                 }
     
                 console.log('New row inserted successfully:', insertResult);
-                // Redirect to the same page to display the updated data
                 res.redirect('/server0');
             });
             
@@ -45,12 +41,10 @@ const server0_controller = {
                 return res.status(500).send('Internal Server Error');
             }
 
-            // Use the connection for database operations
             const searchQuery = 'SELECT * FROM appointments WHERE pxid = ?';
             const searchValues = [pxid_b];
 
             connection.query(searchQuery, searchValues, (error, results) => {
-                // Release the connection back to the pool
                 connection.release();
 
                 if (error) {
@@ -59,8 +53,7 @@ const server0_controller = {
                 }
 
                 console.log()
-                // Send the search results to the client
-                res.render('Server0', { data: results }); // Assuming you have a search_results.hbs file for rendering search results
+                res.render('Server0', { data: results });
             });
         });
     },
@@ -74,12 +67,10 @@ const server0_controller = {
                 return res.status(500).send('Internal Server Error');
             }
     
-            // Use the connection for database operations
             const deleteQuery = 'DELETE FROM appointments WHERE apptid = ?';
             const deleteValues = [apptid_b];
     
             connection.query(deleteQuery, deleteValues, (deleteError, deleteResult) => {
-                // Release the connection back to the pool
                 connection.release();
     
                 if (deleteError) {
@@ -88,8 +79,7 @@ const server0_controller = {
                 }
     
                 console.log('Row deleted successfully:', deleteResult);
-                // Redirect to the same page to display the updated data or handle as appropriate
-                res.redirect('/server0'); // Redirect to the same page or any other page
+                res.redirect('/server0'); 
             });
         });
     },
@@ -103,12 +93,10 @@ const server0_controller = {
                 return res.status(500).send('Internal Server Error');
             }
     
-            // Use the connection for database operations
             const updateQuery = 'UPDATE appointments SET pxid = ?, RegionName = ? WHERE apptid = ?';
             const updateValues = [pxid_b, RegionName_b, apptid_b];
     
             connection.query(updateQuery, updateValues, (updateError, updateResult) => {
-                // Release the connection back to the pool
                 connection.release();
     
                 if (updateError) {
@@ -117,8 +105,7 @@ const server0_controller = {
                 }
     
                 console.log('Row updated successfully:', updateResult);
-                // Redirect to the same page to display the updated data or handle as appropriate
-                res.redirect('/server0'); // Redirect to the same page or any other page
+                res.redirect('/server0'); 
             });
         });
     }

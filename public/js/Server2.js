@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 return response.text();
             })
             .then(html => {
-                document.getElementById('searchForm').reset();//check later
+                document.getElementById('searchForm').reset();
                 document.body.innerHTML = html;
                 buttons();
             })

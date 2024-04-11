@@ -52,30 +52,18 @@
         <thead>
             <tr>
                 <th>Appointment ID</th>
+                <th>Patient ID</th>
                 <th>Region</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Inside the <tbody> tag -->
             {{#each data}}
             <tr>
                 <td>{{this.apptid}}</td>
+                <td>{{this.pxid}}</td>
                 <td>{{this.RegionName}}</td>
-                {{!-- <td>
-                    <form action="edit_appointment.php" method="post">
-                        <input type="hidden" name="appointment_id" value="<?php echo $appointment['id']; ?>">
-                        <button type="submit">Edit</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="delete_appointment.php" method="post">
-                        <input type="hidden" name="appointment_id" value="<?php echo $appointment['id']; ?>">
-                        <button type="submit">Delete</button>
-                    </form>
-                </td> --}}
             </tr>
             {{/each}}
-
         </tbody>
     </table>
 <script src="/js/Server1.js"></script>

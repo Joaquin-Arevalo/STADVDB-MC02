@@ -83,27 +83,16 @@
         <thead>
             <tr>
                 <th>Appointment ID</th>
+                <th>Patient ID</th>
                 <th>Region</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Inside the <tbody> tag -->
             {{#each data}}
             <tr>
                 <td>{{this.apptid}}</td>
+                <td>{{this.pxid}}</td>
                 <td>{{this.RegionName}}</td>
-                {{!-- <td>
-                    <form >
-                        <input type="hidden">
-                        <button type="submit">Edit</button>
-                    </form>
-                </td> --}}
-                {{!-- <td>
-                    <form id="deleteForm">
-                        <input type="hidden" name="appointment_id" value="{{this.apptid}}">
-                        <button type="submit" id="delete-button">Delete</button>
-                    </form>
-                </td> --}}
             </tr>
             {{/each}}
         </tbody>

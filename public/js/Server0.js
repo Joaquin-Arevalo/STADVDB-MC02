@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function(){
             })
             .then(html => {
                 console.log(html);
-                document.getElementById('appointmentForm').reset();//check later
+                document.getElementById('appointmentForm').reset();
                 location.reload();
                 buttons();
             })
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 return response.text();
             })
             .then(html => {
-                document.getElementById('searchForm').reset();//check later
+                document.getElementById('searchForm').reset();
                 document.body.innerHTML = html;
                 buttons();
             })
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function(){
             })
             .then(html => {
                 console.log(html);
-                document.getElementById('appointmentForm').reset();//check later
+                document.getElementById('appointmentForm').reset();
                 location.reload();
                 buttons();
             })

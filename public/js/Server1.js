@@ -3,10 +3,11 @@ document.addEventListener("DOMContentLoaded", function(){
     buttons();
 
     function buttons(){
+
         var search_button = document.getElementById('search-button');
         search_button.addEventListener('click', searchData);
 
-        function searchData(event){
+        async function searchData(event){
             event.preventDefault();
             const pxid = document.getElementById('search').value;
 
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 return response.text();
             })
             .then(html => {
-                document.getElementById('searchForm').reset();//check later
+                document.getElementById('searchForm').reset();
                 document.body.innerHTML = html;
                 buttons();
             })
@@ -38,3 +39,5 @@ document.addEventListener("DOMContentLoaded", function(){
     
 
 });
+
+module.exports = searchData

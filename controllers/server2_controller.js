@@ -14,12 +14,11 @@ const server2_controller = {
                 return res.status(500).send('Internal Server Error');
             }
 
-            // Use the connection for database operations
             const searchQuery = 'SELECT * FROM appointments WHERE pxid = ?';
             const searchValues = [pxid_b];
 
             connection.query(searchQuery, searchValues, (error, results) => {
-                // Release the connection back to the pool
+
                 connection.release();
 
                 if (error) {
@@ -29,9 +28,8 @@ const server2_controller = {
 
 
 
-                 console.log('Search results:', results); // Log the results here
-                // Send the search results to the client
-                res.render('Server2', { data: results }); // Assuming you have a search_results.hbs file for rendering search results
+                console.log('Search results:', results);
+                res.render('Server2', { data: results });
             });
         });
     }
