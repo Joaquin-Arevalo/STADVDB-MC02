@@ -6,7 +6,7 @@ const server2_controller = {
     },
 
     search_data_server2: async function(req, res){
-        const {pxid_b} = req.body;
+        const {apptid_b} = req.body;
 
         pool.getConnection((err, connection) => {
             if (err) {
@@ -14,22 +14,28 @@ const server2_controller = {
                 return res.status(500).send('Internal Server Error');
             }
 
-            const searchQuery = 'SELECT * FROM appointments WHERE pxid = ?';
-            const searchValues = [pxid_b];
-
-            connection.query(searchQuery, searchValues, (error, results) => {
-
-                connection.release();
-
-                if (error) {
-                    console.error('Error executing query:', error);
+            connection.query('SET TRANSACTION ISOLATION LEVEL READ COMMITTED;', (err) => {
+                if (err) {
+                    console.error('Error setting transaction isolation level:', err);
+                    connection.release();
                     return res.status(500).send('Internal Server Error');
                 }
 
+                const searchQuery = 'SELECT * FROM appointments WHERE apptid = ?';
+                const searchValues = [apptid_b];
 
+                connection.query(searchQuery, searchValues, (error, results) => {
 
-                console.log('Search results:', results);
-                res.render('Server2', { data: results });
+                    connection.release();
+
+                    if (error) {
+                        console.error('Error executing query:', error);
+                        return res.status(500).send('Internal Server Error');
+                    }
+
+                    console.log('Search results:', results);
+                    res.render('Server2', { data: results });
+                });
             });
         });
     }
