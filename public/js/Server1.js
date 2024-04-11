@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
         async function searchData(event){
             event.preventDefault();
-            const pxid = document.getElementById('search').value;
+            const apptd = document.getElementById('search').value;
 
             fetch('/search_data_server1', {
                 method: 'POST',
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: new URLSearchParams({
-                    pxid_b: pxid
+                    apptid_b: apptd
                 }),
             })
             .then(response => {
